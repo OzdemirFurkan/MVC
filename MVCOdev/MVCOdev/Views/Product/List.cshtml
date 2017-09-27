@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+@using MVCOdev.Data
+@model List<Urunler>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+<div>
+    <table border="1" width="100%">
+        <thead>
+        <tr>
+            <th>Urun Adi</th>
+            <th>Fiyat</th>
+            <th>İşlemler</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.urunAd</td>
+                <td>@item.urunFiyat</td>
+                <td>
+                    <a href="/Product/Delete/@item.urunID">Sil</a>
+                    <a href="/Product/Edit/@item.urunID">Güncelle</a>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+    
+    <a href="/Product/Add">Urun Ekle</a>
+
+</div>
+</body>
+</html>

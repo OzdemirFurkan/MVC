@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="odevDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="urunID" />
+    </Key>
+    <Property Name="urunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="urunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="urunFiyat" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="stok" Type="Int16" />
+    <Property Name="nameSlug" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Kategorilers" Relationship="odevDbModel.FK_Kategoriler_Urunler" FromRole="Urunler" ToRole="Kategoriler" />
+  </EntityType>
+  <EntityContainer Name="odevDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Urunlers" EntityType="Self.Urunler" />
+    <EntitySet Name="Kategorilers" EntityType="odevDbModel.Kategoriler" />
+    <AssociationSet Name="FK_Kategoriler_Urunler" Association="odevDbModel.FK_Kategoriler_Urunler">
+      <End Role="Urunler" EntitySet="Urunlers" />
+      <End Role="Kategoriler" EntitySet="Kategorilers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="kategoriID" />
+    </Key>
+    <Property Name="kategoriID" Type="Int32" Nullable="false" />
+    <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kategoriAciklama" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="urunID" Type="Int32" />
+    <NavigationProperty Name="Urunler" Relationship="odevDbModel.FK_Kategoriler_Urunler" FromRole="Kategoriler" ToRole="Urunler" />
+  </EntityType>
+  <Association Name="FK_Kategoriler_Urunler">
+    <End Type="odevDbModel.Urunler" Role="Urunler" Multiplicity="0..1" />
+    <End Type="odevDbModel.Kategoriler" Role="Kategoriler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="urunID" />
+      </Principal>
+      <Dependent Role="Kategoriler">
+        <PropertyRef Name="urunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

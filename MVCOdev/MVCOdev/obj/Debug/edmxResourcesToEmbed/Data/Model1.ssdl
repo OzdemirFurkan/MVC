@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="odevDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="kategoriID" />
+    </Key>
+    <Property Name="kategoriID" Type="int" Nullable="false" />
+    <Property Name="kategoriAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="kategoriAciklama" Type="nchar" MaxLength="10" />
+    <Property Name="urunID" Type="int" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="urunID" />
+    </Key>
+    <Property Name="urunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunAd" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="urunFiyat" Type="money" />
+    <Property Name="stok" Type="smallint" />
+    <Property Name="nameSlug" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Kategoriler_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="urunID" />
+      </Principal>
+      <Dependent Role="Kategoriler">
+        <PropertyRef Name="urunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="odevDbModelStoreContainer">
+    <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Kategoriler_Urunler" Association="Self.FK_Kategoriler_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="Kategoriler" EntitySet="Kategoriler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

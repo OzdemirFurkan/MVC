@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+@using MVCOdev.Data
+@model Urunler
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+    <div> <label>@ViewBag.Message</label>
+
+    @* tüm hataları yakalar ve sıralar döküm halinde verir. *@
+    @Html.ValidationSummary()
+
+    @* form input alanlarından saldırıları kapar *@
+
+
+    @using (Html.BeginForm())
+    {
+        //AntiForgeryToken BeginForm içinde olmalıdır
+        @Html.AntiForgeryToken()
+        @Html.LabelFor(x => x.urunAd)
+        @Html.TextBoxFor(x => x.urunAd)
+        <br />
+        @Html.LabelFor(x => x.urunFiyat)
+        @Html.TextAreaFor(x => x.urunFiyat)
+
+            <input type="submit" name="name" value="Ekle" />
+    }
+    </div>
+</body>
+</html>

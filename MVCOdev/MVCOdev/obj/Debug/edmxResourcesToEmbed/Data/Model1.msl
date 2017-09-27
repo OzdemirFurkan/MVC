@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="odevDbModelStoreContainer" CdmEntityContainer="odevDB">
+    <EntitySetMapping Name="Urunlers">
+      <EntityTypeMapping TypeName="odevDbModel.Urunler">
+        <MappingFragment StoreEntitySet="Urunler">
+          <ScalarProperty Name="urunID" ColumnName="urunID" />
+          <ScalarProperty Name="urunAd" ColumnName="urunAd" />
+          <ScalarProperty Name="urunFiyat" ColumnName="urunFiyat" />
+          <ScalarProperty Name="stok" ColumnName="stok" />
+          <ScalarProperty Name="nameSlug" ColumnName="nameSlug" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategorilers">
+      <EntityTypeMapping TypeName="odevDbModel.Kategoriler">
+        <MappingFragment StoreEntitySet="Kategoriler">
+          <ScalarProperty Name="urunID" ColumnName="urunID" />
+          <ScalarProperty Name="kategoriAciklama" ColumnName="kategoriAciklama" />
+          <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+          <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

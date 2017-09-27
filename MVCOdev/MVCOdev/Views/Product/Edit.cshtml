@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+@using MVCOdev.Data
+@model Urunler
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    
+</head>
+<body>
+<div>
+    
+    @Html.ValidationSummary()
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.LabelFor(x => x.urunAd)
+        @Html.TextBoxFor(x => x.urunAd)
+        @Html.LabelFor(x => x.urunFiyat)
+        @Html.TextAreaFor(x => x.urunFiyat)
+
+        <input type="submit" name="name" value="Güncelle"/>
+    }
+    
+    <a href="/Product/List">Geri Don</a>
+</div>
+</body>
+</html>
