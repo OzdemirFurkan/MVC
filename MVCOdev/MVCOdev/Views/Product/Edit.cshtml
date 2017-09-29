@@ -23,6 +23,9 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.urunID)
+
+
         @Html.LabelFor(x => x.urunAd)
         @Html.TextBoxFor(x => x.urunAd)
         @Html.LabelFor(x => x.urunFiyat)
