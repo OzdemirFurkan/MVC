@@ -1,0 +1,57 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.dropdown-menu {
+    left: inherit !important;
+    right: 5%;
+}
+
+ul.dropdown-lr {
+  width: 300px;
+}
+
+/* mobile fix */
+@media (max-width: 768px) {
+	.dropdown-lr h3 {
+		color: #eee;
+	}
+	.dropdown-lr label {
+		color: #eee;
+	}
+}
+label {
+   cursor: pointer;
+}
+
+
+#upload-photo {
+   opacity: 0 !important;
+   position: absolute!important;
+   z-index: -1!important;
+}
+
+#upload-product {
+   opacity: 0 !important;
+   position: absolute!important;
+   z-index: -1!important;
+}
+
+.filter-col{
+    padding-left:10px;
+    padding-right:10px;
+}

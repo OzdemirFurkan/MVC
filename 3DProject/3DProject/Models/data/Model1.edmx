@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlogTable">
+          <Key>
+            <PropertyRef Name="blogID" />
+          </Key>
+          <Property Name="blogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="blogCategoryID" Type="int" />
+          <Property Name="blogName" Type="nvarchar" MaxLength="50" />
+          <Property Name="blogContent" Type="nvarchar" MaxLength="4000" />
+          <Property Name="blogImage" Type="nvarchar" MaxLength="50" />
+          <Property Name="blogAddDate" Type="datetime" />
+          <Property Name="blogLikeID" Type="int" />
+        </EntityType>
+        <EntityType Name="KapakPictureTable">
+          <Key>
+            <PropertyRef Name="kapakID" />
+          </Key>
+          <Property Name="kapakID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kapakPath" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LogTable">
+          <Key>
+            <PropertyRef Name="logID" />
+          </Key>
+          <Property Name="logID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="IslemTarihi" Type="datetime" />
+          <Property Name="Tip" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PictureTable">
+          <Key>
+            <PropertyRef Name="pictureID" />
+          </Key>
+          <Property Name="pictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pictureName" Type="nvarchar" MaxLength="50" />
+          <Property Name="picturePath" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductCategoryTable">
+          <Key>
+            <PropertyRef Name="pcategoryID" />
+          </Key>
+          <Property Name="pcategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="varchar" MaxLength="50" />
+          <Property Name="categoryDesc" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ProductTable">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="productCategoryID" Type="int" />
+          <Property Name="productName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="productDescription" Type="varchar" MaxLength="200" />
+          <Property Name="productImage" Type="nvarchar" MaxLength="50" />
+          <Property Name="productAddDate" Type="datetime" Nullable="false" />
+          <Property Name="productLikeId" Type="int" />
+        </EntityType>
+        <EntityType Name="RoleUserTable">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserRoleTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Aciklama" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="ActivationCode" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="kapakID" Type="int" />
+          <Property Name="likeID" Type="int" />
+          <Property Name="logID" Type="int" />
+          <Property Name="blogID" Type="int" />
+          <Property Name="pictureID" Type="int" />
+        </EntityType>
+        <Association Name="FK_BlogTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="BlogTable" Type="Self.BlogTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogTable">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTable_ProductCategoryTable">
+          <End Role="ProductCategoryTable" Type="Self.ProductCategoryTable" Multiplicity="0..1" />
+          <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategoryTable">
+              <PropertyRef Name="pcategoryID" />
+            </Principal>
+            <Dependent Role="ProductTable">
+              <PropertyRef Name="productCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTable">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleUserTable_UserRoleTable">
+          <End Role="UserRoleTable" Type="Self.UserRoleTable" Multiplicity="1" />
+          <End Role="RoleUserTable" Type="Self.RoleUserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoleTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleUserTable">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleUserTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="RoleUserTable" Type="Self.RoleUserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleUserTable">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTable_KapakPictureTable">
+          <End Role="KapakPictureTable" Type="Self.KapakPictureTable" Multiplicity="0..1" />
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KapakPictureTable">
+              <PropertyRef Name="kapakID" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="kapakID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTable_LogTable">
+          <End Role="LogTable" Type="Self.LogTable" Multiplicity="0..1" />
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogTable">
+              <PropertyRef Name="logID" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="logID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTable_PictureTable">
+          <End Role="PictureTable" Type="Self.PictureTable" Multiplicity="0..1" />
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PictureTable">
+              <PropertyRef Name="pictureID" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="pictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dDataModelStoreContainer">
+          <EntitySet Name="BlogTable" EntityType="Self.BlogTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KapakPictureTable" EntityType="Self.KapakPictureTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogTable" EntityType="Self.LogTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PictureTable" EntityType="Self.PictureTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategoryTable" EntityType="Self.ProductCategoryTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTable" EntityType="Self.ProductTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleUserTable" EntityType="Self.RoleUserTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoleTable" EntityType="Self.UserRoleTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BlogTable_UserTable" Association="Self.FK_BlogTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="BlogTable" EntitySet="BlogTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTable_ProductCategoryTable" Association="Self.FK_ProductTable_ProductCategoryTable">
+            <End Role="ProductCategoryTable" EntitySet="ProductCategoryTable" />
+            <End Role="ProductTable" EntitySet="ProductTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTable_UserTable" Association="Self.FK_ProductTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="ProductTable" EntitySet="ProductTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleUserTable_UserRoleTable" Association="Self.FK_RoleUserTable_UserRoleTable">
+            <End Role="UserRoleTable" EntitySet="UserRoleTable" />
+            <End Role="RoleUserTable" EntitySet="RoleUserTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleUserTable_UserTable" Association="Self.FK_RoleUserTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="RoleUserTable" EntitySet="RoleUserTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTable_KapakPictureTable" Association="Self.FK_UserTable_KapakPictureTable">
+            <End Role="KapakPictureTable" EntitySet="KapakPictureTable" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTable_LogTable" Association="Self.FK_UserTable_LogTable">
+            <End Role="LogTable" EntitySet="LogTable" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTable_PictureTable" Association="Self.FK_UserTable_PictureTable">
+            <End Role="PictureTable" EntitySet="PictureTable" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MyDb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="dDataModel.sysdiagrams" />
+          <EntitySet Name="UserRoleTable" EntityType="dDataModel.UserRoleTable" />
+          <EntitySet Name="ProductCategoryTable" EntityType="dDataModel.ProductCategoryTable" />
+          <EntitySet Name="KapakPictureTable" EntityType="dDataModel.KapakPictureTable" />
+          <EntitySet Name="LogTable" EntityType="dDataModel.LogTable" />
+          <EntitySet Name="ProductTable" EntityType="dDataModel.ProductTable" />
+          <AssociationSet Name="FK_ProductTable_ProductCategoryTable" Association="dDataModel.FK_ProductTable_ProductCategoryTable">
+            <End Role="ProductCategoryTable" EntitySet="ProductCategoryTable" />
+            <End Role="ProductTable" EntitySet="ProductTable" />
+          </AssociationSet>
+          <EntitySet Name="BlogTable" EntityType="dDataModel.BlogTable" />
+          <EntitySet Name="UserTable" EntityType="dDataModel.UserTable" />
+          <AssociationSet Name="FK_BlogTable_UserTable" Association="dDataModel.FK_BlogTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="BlogTable" EntitySet="BlogTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTable_KapakPictureTable" Association="dDataModel.FK_UserTable_KapakPictureTable">
+            <End Role="KapakPictureTable" EntitySet="KapakPictureTable" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTable_LogTable" Association="dDataModel.FK_UserTable_LogTable">
+            <End Role="LogTable" EntitySet="LogTable" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTable_UserTable" Association="dDataModel.FK_ProductTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="ProductTable" EntitySet="ProductTable" />
+          </AssociationSet>
+          <AssociationSet Name="RoleUserTable" Association="dDataModel.RoleUserTable">
+            <End Role="UserRoleTable" EntitySet="UserRoleTable" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+          <EntitySet Name="PictureTable" EntityType="dDataModel.PictureTable" />
+          <AssociationSet Name="FK_UserTable_PictureTable" Association="dDataModel.FK_UserTable_PictureTable">
+            <End Role="PictureTable" EntitySet="PictureTable" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserRoleTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Aciklama" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserTable" Relationship="dDataModel.RoleUserTable" FromRole="UserRoleTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="ProductCategoryTable">
+          <Key>
+            <PropertyRef Name="pcategoryID" />
+          </Key>
+          <Property Name="pcategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="categoryDesc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductTable" Relationship="dDataModel.FK_ProductTable_ProductCategoryTable" FromRole="ProductCategoryTable" ToRole="ProductTable" />
+        </EntityType>
+        <EntityType Name="KapakPictureTable">
+          <Key>
+            <PropertyRef Name="kapakID" />
+          </Key>
+          <Property Name="kapakID" Type="Int32" Nullable="false" />
+          <Property Name="kapakPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserTable" Relationship="dDataModel.FK_UserTable_KapakPictureTable" FromRole="KapakPictureTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="LogTable">
+          <Key>
+            <PropertyRef Name="logID" />
+          </Key>
+          <Property Name="logID" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IslemTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Tip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserTable" Relationship="dDataModel.FK_UserTable_LogTable" FromRole="LogTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="ProductTable">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="productCategoryID" Type="Int32" />
+          <Property Name="productName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="productImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productAddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="productLikeId" Type="Int32" />
+          <NavigationProperty Name="ProductCategoryTable" Relationship="dDataModel.FK_ProductTable_ProductCategoryTable" FromRole="ProductTable" ToRole="ProductCategoryTable" />
+          <NavigationProperty Name="UserTable" Relationship="dDataModel.FK_ProductTable_UserTable" FromRole="ProductTable" ToRole="UserTable" />
+        </EntityType>
+        <Association Name="FK_ProductTable_ProductCategoryTable">
+          <End Type="dDataModel.ProductCategoryTable" Role="ProductCategoryTable" Multiplicity="0..1" />
+          <End Type="dDataModel.ProductTable" Role="ProductTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategoryTable">
+              <PropertyRef Name="pcategoryID" />
+            </Principal>
+            <Dependent Role="ProductTable">
+              <PropertyRef Name="productCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BlogTable">
+          <Key>
+            <PropertyRef Name="blogID" />
+          </Key>
+          <Property Name="blogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="blogCategoryID" Type="Int32" />
+          <Property Name="blogName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="blogContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="blogImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="blogAddDate" Type="DateTime" Precision="3" />
+          <Property Name="blogLikeID" Type="Int32" />
+          <NavigationProperty Name="UserTable" Relationship="dDataModel.FK_BlogTable_UserTable" FromRole="BlogTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ActivationCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="kapakID" Type="Int32" />
+          <Property Name="likeID" Type="Int32" />
+          <Property Name="logID" Type="Int32" />
+          <Property Name="blogID" Type="Int32" />
+          <Property Name="pictureID" Type="Int32" />
+          <NavigationProperty Name="BlogTable" Relationship="dDataModel.FK_BlogTable_UserTable" FromRole="UserTable" ToRole="BlogTable" />
+          <NavigationProperty Name="KapakPictureTable" Relationship="dDataModel.FK_UserTable_KapakPictureTable" FromRole="UserTable" ToRole="KapakPictureTable" />
+          <NavigationProperty Name="LogTable" Relationship="dDataModel.FK_UserTable_LogTable" FromRole="UserTable" ToRole="LogTable" />
+          <NavigationProperty Name="ProductTable" Relationship="dDataModel.FK_ProductTable_UserTable" FromRole="UserTable" ToRole="ProductTable" />
+          <NavigationProperty Name="UserRoleTable" Relationship="dDataModel.RoleUserTable" FromRole="UserTable" ToRole="UserRoleTable" />
+          <NavigationProperty Name="PictureTable" Relationship="dDataModel.FK_UserTable_PictureTable" FromRole="UserTable" ToRole="PictureTable" />
+        </EntityType>
+        <Association Name="FK_BlogTable_UserTable">
+          <End Type="dDataModel.UserTable" Role="UserTable" Multiplicity="0..1" />
+          <End Type="dDataModel.BlogTable" Role="BlogTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogTable">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTable_KapakPictureTable">
+          <End Type="dDataModel.KapakPictureTable" Role="KapakPictureTable" Multiplicity="0..1" />
+          <End Type="dDataModel.UserTable" Role="UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KapakPictureTable">
+              <PropertyRef Name="kapakID" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="kapakID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTable_LogTable">
+          <End Type="dDataModel.LogTable" Role="LogTable" Multiplicity="0..1" />
+          <End Type="dDataModel.UserTable" Role="UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogTable">
+              <PropertyRef Name="logID" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="logID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTable_UserTable">
+          <End Type="dDataModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="dDataModel.ProductTable" Role="ProductTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTable">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleUserTable">
+          <End Type="dDataModel.UserRoleTable" Role="UserRoleTable" Multiplicity="*" />
+          <End Type="dDataModel.UserTable" Role="UserTable" Multiplicity="*" />
+        </Association>
+        <EntityType Name="PictureTable">
+          <Key>
+            <PropertyRef Name="pictureID" />
+          </Key>
+          <Property Name="pictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pictureName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="picturePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserTable" Relationship="dDataModel.FK_UserTable_PictureTable" FromRole="PictureTable" ToRole="UserTable" />
+        </EntityType>
+        <Association Name="FK_UserTable_PictureTable">
+          <End Type="dDataModel.PictureTable" Role="PictureTable" Multiplicity="0..1" />
+          <End Type="dDataModel.UserTable" Role="UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PictureTable">
+              <PropertyRef Name="pictureID" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="pictureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dDataModelStoreContainer" CdmEntityContainer="MyDb">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dDataModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoleTable">
+            <EntityTypeMapping TypeName="dDataModel.UserRoleTable">
+              <MappingFragment StoreEntitySet="UserRoleTable">
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategoryTable">
+            <EntityTypeMapping TypeName="dDataModel.ProductCategoryTable">
+              <MappingFragment StoreEntitySet="ProductCategoryTable">
+                <ScalarProperty Name="categoryDesc" ColumnName="categoryDesc" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="pcategoryID" ColumnName="pcategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KapakPictureTable">
+            <EntityTypeMapping TypeName="dDataModel.KapakPictureTable">
+              <MappingFragment StoreEntitySet="KapakPictureTable">
+                <ScalarProperty Name="kapakPath" ColumnName="kapakPath" />
+                <ScalarProperty Name="kapakID" ColumnName="kapakID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogTable">
+            <EntityTypeMapping TypeName="dDataModel.LogTable">
+              <MappingFragment StoreEntitySet="LogTable">
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="IslemTarihi" ColumnName="IslemTarihi" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="logID" ColumnName="logID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTable">
+            <EntityTypeMapping TypeName="dDataModel.ProductTable">
+              <MappingFragment StoreEntitySet="ProductTable">
+                <ScalarProperty Name="productLikeId" ColumnName="productLikeId" />
+                <ScalarProperty Name="productAddDate" ColumnName="productAddDate" />
+                <ScalarProperty Name="productImage" ColumnName="productImage" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productCategoryID" ColumnName="productCategoryID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogTable">
+            <EntityTypeMapping TypeName="dDataModel.BlogTable">
+              <MappingFragment StoreEntitySet="BlogTable">
+                <ScalarProperty Name="blogLikeID" ColumnName="blogLikeID" />
+                <ScalarProperty Name="blogAddDate" ColumnName="blogAddDate" />
+                <ScalarProperty Name="blogImage" ColumnName="blogImage" />
+                <ScalarProperty Name="blogContent" ColumnName="blogContent" />
+                <ScalarProperty Name="blogName" ColumnName="blogName" />
+                <ScalarProperty Name="blogCategoryID" ColumnName="blogCategoryID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="blogID" ColumnName="blogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTable">
+            <EntityTypeMapping TypeName="dDataModel.UserTable">
+              <MappingFragment StoreEntitySet="UserTable">
+                <ScalarProperty Name="pictureID" ColumnName="pictureID" />
+                <ScalarProperty Name="blogID" ColumnName="blogID" />
+                <ScalarProperty Name="logID" ColumnName="logID" />
+                <ScalarProperty Name="likeID" ColumnName="likeID" />
+                <ScalarProperty Name="kapakID" ColumnName="kapakID" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RoleUserTable" TypeName="dDataModel.RoleUserTable" StoreEntitySet="RoleUserTable">
+            <EndProperty Name="UserTable">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="UserRoleTable">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="PictureTable">
+            <EntityTypeMapping TypeName="dDataModel.PictureTable">
+              <MappingFragment StoreEntitySet="PictureTable">
+                <ScalarProperty Name="picturePath" ColumnName="picturePath" />
+                <ScalarProperty Name="pictureName" ColumnName="pictureName" />
+                <ScalarProperty Name="pictureID" ColumnName="pictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

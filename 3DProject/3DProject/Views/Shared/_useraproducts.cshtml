@@ -1,0 +1,20 @@
+﻿@model IEnumerable<_3DProject.Models.data.ProductTable>
+
+
+@foreach (var item1 in Model)
+{
+    <div class="isotope-item iso-height-1">
+        <!-- Begin gallery single item -->
+        <a href="@Html.DisplayFor(model => item1.productImage)" class="gallery-single-item lg-trigger" data-exthumbnail="@Html.DisplayFor(model => item1.productImage)" data-sub-html="<p>@Html.DisplayFor(model => item1.productDescription)</p>">
+            <!-- Begin gallery single item image -->
+            <div class="gs-item-image bg-image" style="background-image: url(@Html.DisplayFor(model => item1.productImage)); background-position: 50% 50%"></div>
+            <!-- End gallery single item image -->
+            <!-- Gallery single item image caption -->
+            <div class="gsi-image-caption">@Html.DisplayFor(model => item1.productDescription)</div>
+            <!-- Gallery single item icon -->
+            <div class="gs-item-icon"><i class="fa fa-search"></i></div>
+
+        </a>
+        <!-- End gallery single item -->
+    </div>
+}

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<_3DProject.Models.data.ProductTable>
+    
+
+@foreach (var item in Model)
+{
+    <div class="isotope-item">
+        <!-- Begin gallery single item -->
+
+        <a href="@Html.DisplayFor(model => item.productImage)" class="gallery-single-item lg-trigger" data-exthumbnail="@Html.DisplayFor(model => item.productImage)" data-sub-html="<p>@Html.DisplayFor(model => item.productDescription)</p>">
+            <!-- Begin gallery single item image -->
+            <img src="@Html.DisplayFor(model => item.productImage)" class="gs-item-image" alt="">
+            <!-- End gallery single item image -->
+            <!-- Gallery single item image caption -->
+            <div class="gsi-image-caption">@Html.DisplayFor(model => item.productDescription)</div>
+            <!-- Gallery single item icon -->
+            <div class="gs-item-icon"><i class="fa fa-search"></i>
+            </div>  
+
+        </a>
+        <!-- End gallery single item -->
+    </div>
+}
+<!-- End isotope item -->
+<!-- =====================
+
+
+</div>
+<!-- End isotope items wrap -->
+<!-- Begin isotope pagination
+============================== -->
+<!-- End isotope pagination -->
+                        </div>
+<!-- End isotope -->
+                    </div> <!-- /.isotope-wrap -->
+                </div> <!-- /.col -->
+            </div> <!-- /.row -->
+        </div> <!-- /.tt-wrap -->

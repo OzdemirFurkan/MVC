@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="contact-section">
+    <div class="contact-section-inner">
+        <!-- add/remove class "tt-wrap" to enable/disable element boxed layout (class "tt-boxed" is required in <body> tag! ) -->
+        <!-- ======================
+        ======================= -->
+        <div class="split-box">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="row-lg-height full-height-vh">
+                        <!-- Column -->
+                        <div class="col-lg-6 col-lg-height col-lg-middle bg-image" style="background-image: url(assets/img/misc/contact-bg.jpg); background-position: 50% 50%;">
+                            <!-- Element cover -->
+                            <div class="cover bg-transparent-0-5-dark"></div>
+                            <!-- Begin split box content -->
+                            <div class="split-box-content text-left no-padding-left no-padding-right">
+                                <!-- Begin contact info -->
+                                <div class="contact-info-wrap">
+                                    <div class="contact-info">
+                                        <p><i class="fa fa-home"></i> address: 121 King Street, Melbourne, Australia</p>
+                                        <p><i class="fa fa-phone"></i> phone: +123 456 789 000</p>
+                                        <p><i class="fa fa-envelope"></i> email: <a href="mailto:company@email.com" target="_blank">company@email.com</a></p>
+                                    </div>
+                                    <!-- Begin social buttons -->
+                                    <div class="social-buttons margin-top-20">
+                                        <ul>
+                                            <li><a href="" class="btn btn-social-min btn-default btn-rounded-full" title="Follow me on Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="" class="btn btn-social-min btn-default btn-rounded-full" title="Follow me on Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="" class="btn btn-social-min btn-default btn-rounded-full" title="Follow me on Google+" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="" class="btn btn-social-min btn-default btn-rounded-full" title="Follow me on Pinterest" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                                            <li><a href="" class="btn btn-social-min btn-default btn-rounded-full" title="Follow me on Dribbble" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- End social buttons -->
+                                </div>
+                                <!-- End contact info -->
+                            </div>
+                            <!-- End split box content -->
+                        </div> <!-- /.col -->
+                        <!-- Column -->
+                        <div class="col-lg-6 col-lg-height col-lg-middle no-padding">
+                            <!-- Begin split box content -->
+                            <div class="split-box-content">
+                                <!-- Begin contact form
+                                ========================= -->
+                                @using (Ajax.BeginForm("Register", "Account", new AjaxOptions { OnSuccess = "RegisterSuccess", HttpMethod = "Post" }))
+                                {
+                                    <form id="contact-form">
+                                        <div class="contact-form-inner text-left">
+                                            <div class="contact-form-info">
+                                                <!-- Begin tt-heading
+                                                ======================
+                                                * Use class "padding-on" to enable heading paddings (useful if you use tt-heading as stand alone element).
+                                                * Use class "text-center" or "text-right" to align tt-heading.
+                                                * Use classes "tt-heading-xs", "tt-heading-sm", "tt-heading-lg", "tt-heading-xlg" or "tt-heading-xxlg" to set tt-heading size.
+                                                -->
+                                                <div class="tt-heading">
+                                                    <div class="tt-heading-inner">
+                                                        <h1 class="tt-heading-title">Kayit Ol!</h1>
+                                                        <!-- <div class="tt-heading-subtitle">Subtitle Here</div> -->
+                                                        <hr class="hr-short">
+                                                    </div> <!-- /.tt-heading-inner -->
+                                                </div>
+                                                <!-- End tt-heading -->
+                                                <div class="margin-top-30">
+                                                    <p>Binlerce firsat ve icerik bir tik uzaginda</p>
+                                                </div>
+                                            </div>
+                                            <!-- Begin hidden required fields () -->
+                                            <!-- Change value to your site name -->
+                                            <!-- Change value to your valid email address (where a message will be sent) -->
+                                            <!-- End Hidden Required Fields -->
+
+                                            @Html.AntiForgeryToken()
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        @Html.TextBox("UserName", null, new { @class = "form-control", @placeholder = "Kullanici Adiniz" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        @Html.TextBox("EmailAddress", null, new { @class = "form-control", @placeholder = "Eposta Adresi" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        @Html.Password("Password", null, new { @class = "form-control", @placeholder = "Sifre" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        @Html.Password("PasswordAgain", null, new { @class = "form-control", @placeholder = "Sifre Tekrar" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    @*<div id="recaptcha2"></div>*@
+                                                </div>
+                                            </div>
+
+                                            <div class="small text-gray"><em>* All fields are required!</em></div>
+                                        </div> <!-- /.contact-form-inner -->
+                                        
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                       <input type="submit" class="btn btn-primary btn-lg margin-top-40" name="name" value="Kayıt Ol!">
+                                            </div>
+                                        </div>
+                                    </form>
+                                }
+                                <!-- End contact form -->
+                            </div>
+                            <!-- End split box content -->
+                        </div> <!-- /.col -->
+                    </div> <!-- /.row-height -->
+                </div> <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12 no-padding">
+                        <!-- Begin custom Google Map
+                        =============================
+                        -->
+                        <!-- End custom Google Map -->
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+
+            </div> <!-- /.container -->
+        </div>
+        <!-- End split box -->
+    </div> <!-- /.contact-section-inner -->
+</section>
+<!-- End contact section -->
+<script>
+
+            function RegisterSuccess(response) {
+
+                if (response.IsSuccess==true) {
+                    alert(response.Message);
+
+                    setTimeout(
+                        function ()
+                        { window.location.href = response.RedirectUrl}, 2000);
+                }
+            }
+
+</script>

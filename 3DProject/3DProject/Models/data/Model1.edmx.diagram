@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8fcb2b266d2741ad8cf0a5d2cf86b0c9" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="dDataModel.sysdiagrams" Width="1.5" PointX="4.625" PointY="6.5" />
+        <EntityTypeShape EntityType="dDataModel.UserRoleTable" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="dDataModel.ProductCategoryTable" Width="1.5" PointX="8.625" PointY="4.75" />
+        <EntityTypeShape EntityType="dDataModel.KapakPictureTable" Width="1.5" PointX="3.125" PointY="4" />
+        <EntityTypeShape EntityType="dDataModel.LogTable" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="dDataModel.ProductTable" Width="1.5" PointX="8.5" PointY="1.25" />
+        <AssociationConnector Association="dDataModel.FK_ProductTable_ProductCategoryTable" />
+        <EntityTypeShape EntityType="dDataModel.BlogTable" Width="1.5" PointX="5.875" PointY="3.625" />
+        <EntityTypeShape EntityType="dDataModel.UserTable" Width="1.5" PointX="7.75" PointY="8.125" />
+        <AssociationConnector Association="dDataModel.FK_BlogTable_UserTable" />
+        <AssociationConnector Association="dDataModel.FK_UserTable_KapakPictureTable" />
+        <AssociationConnector Association="dDataModel.FK_UserTable_LogTable" />
+        <AssociationConnector Association="dDataModel.FK_ProductTable_UserTable" />
+        <AssociationConnector Association="dDataModel.RoleUserTable" />
+        <EntityTypeShape EntityType="dDataModel.PictureTable" Width="1.5" PointX="5.5" PointY="9.375" />
+        <AssociationConnector Association="dDataModel.FK_UserTable_PictureTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

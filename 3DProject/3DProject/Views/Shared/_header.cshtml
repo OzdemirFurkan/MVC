@@ -1,0 +1,166 @@
+﻿
+
+<header id="header" class="header-show-hide-on-scroll menu-align-right">
+    <!-- Begin header inner -->
+    <div class="header-inner tt-wrap">
+        <!-- add/remove class "tt-wrap" to enable/disable element boxed layout (class "tt-boxed" is required in <body> tag! ) -->
+        <!-- Begin logo
+        ================ -->
+        <div id="logo">
+            <a href="" class="logo-dark"><img src="/assets/img/logo-dark.png" alt="logo"></a>
+            <a href="" class="logo-light"><img src="/assets/img/logo-light.png" alt="logo"></a>
+            <!-- for small screens -->
+            <a href="" class="logo-dark-m"><img src="/assets/img/logo-dark-m.png" alt="logo"></a>
+            <a href="" class="logo-light-m"><img src="/assets/img/logo-light-m.png" alt="logo"></a>
+        </div>
+        <!-- End logo -->
+        <!-- ====================
+        //// Begin main menu ////
+        ===================== -->
+        <nav class="tt-main-menu">
+            <!-- Begin mobile menu toggle button -->
+            <div id="tt-m-menu-toggle-btn">
+                <span></span>
+            </div>
+            <!-- End mobile menu toggle button -->
+            <!-- Begin menu tools
+            ====================== -->
+            <div class="tt-menu-tools">
+                <ul>
+                    <!-- Begin search -->
+                    <li>
+                        <a href="#" class="tt-clobal-search-trigger"><i class="fa fa-search"></i></a>
+                        <div class="tt-clobal-search">
+                            <div class="tt-clobal-search-inner">
+                                <span class="tt-clobal-search-title">Search</span>
+                                <form id="tt-clobal-search-form" class="form-btn-inside" method="get" action="">
+                                    <input type="text" id="tt-clobal-search-input" name="search" placeholder="Type your keywords ...">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div> <!-- /.tt-clobal-search-inner -->
+                            <div class="tt-clobal-search-close"><i class="tt-close-btn tt-close-light"></i></div>
+                        </div> <!-- /.tt-clobal-search -->
+                    </li>
+                    <!-- End search -->
+                    <!-- Begin tt-dropdown (languages)
+                    ===================================
+                    * Use class "tt-dropdown-dark" to enable dropdown dark style.
+                    -->
+                    <!-- End tt-dropdown -->
+                    <!-- Begin call to action button -->
+                    @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a href="" data-toggle="dropdown" class="tt-tools-button dropdown-toggle" target="_blank" style="background-color: #00B0FF;">Giriş<span class="hide-from-sm"> Yap</span></a>
+
+                            <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
+                                <div class="col-lg-12">
+                                    <div class="text-center">
+                                        <h3>
+                                            <b>Giris Yap!</b>
+                                        </h3>
+                                    </div>
+                                    @using (Ajax.BeginForm("Login", "Account", new AjaxOptions { OnSuccess = "LoginSuccess", HttpMethod = "Post" }))
+                                    {
+                                        <form id="ajax-register-form" action="" method="post" role="form" autocomplete="off">
+                                            @Html.AntiForgeryToken()
+                                            <div class="form-group">
+                                                @Html.TextBox("EmailAddress", null, new { @class = "form-control", @placeholder = "kullanıcı adı" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.Password("Password", null, new { @class = "form-control", @placeholder = "parola" })
+                                            </div>
+                                            <div class="checkbox-inline">
+                                                @Html.CheckBox("RememberMe") <label>Beni Hatırla</label>
+                                            </div>
+                                            <a class="btn btn-link pull-right" href="/account/passwordreset">Parolamı Unuttum</a>
+                                            <br />
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-xs-offset-3">
+
+                                                        <div class="g-recaptcha" data-sitekey="6LcsdzQUAAAAAJMadKzJxgsojg4VG2BYlsU_aEuf" style="transform:scale(0.89);-webkit-transform:scale(0.89);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+                                                        @*<div id="recaptcha1" style="transform:scale(0.89);-webkit-transform:scale(0.89);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>*@
+                                                        <input type="submit" name="name" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Giriş Yap!">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    }
+
+                                </div>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/Account/Register" class="tt-tools-button">Kayıt<span class="hide-from-sm"> Ol</span>!</a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="tt-submenu-wrap tt-submenu-master">
+                            <a href="#" style="color: #01579B;">Bildirimler</a>
+                        </li>
+                        <a href="/Home/ProfileUser">
+                            <img src="@ViewBag.Uimage" class="img-circle" style="width: 45px; height: 45px; margin-top: 9%; border-style: solid; border-width: 2px; border-color: #2196F3;" />
+                        </a>
+                        
+                    }
+
+
+                    <!-- End call to action button -->
+                </ul>
+            </div>
+            <!-- End menu tools -->
+            <!-- Collect the nav links for toggling
+            ========================================
+            * Use class "tt-submenu-dark" to enable submenu dark style.
+            -->
+            <div class="tt-menu-collapse tt-submenu-dark">
+                <ul class="tt-menu-nav">
+                    <!-- Begin submenu (submenu master)
+                    ==================================== -->
+                    <li class="tt-submenu-master">
+                        <a href="/Home/Index">Keşfet</a>
+                    </li>
+                    <!-- End submenu (sub-master) -->
+                    <!-- Begin submenu (submenu master)
+                    ==================================== -->
+                    <!-- About Buradaydi-->
+                    <!-- End submenu (sub-master) -->
+                    <!-- Begin submenu (submenu master)
+                    ==================================== -->
+                    <!-- Portfolio buradaydi-->
+                    <!-- End submenu (sub-master) -->
+                    <!-- Begin submenu (submenu master)
+                    ==================================== -->
+                    <li class="tt-submenu-master">
+                        <a href="/Home/Blog">Blog</a>
+
+                        <!-- Blog submenuleri su an gerek yok-->
+                        <!-- End submenu (sub-master) -->
+                        <!-- Begin submenu (submenu master)
+                        ==================================== -->
+                        <!-- Contact Buradaydi-->
+                        <!-- End submenu (sub-master) -->
+                        <!-- Begin submenu (submenu master)
+                        ==================================== -->
+                    <li class="tt-submenu-master">
+                        <a href="#0">Bugün Öğrendim</a>
+
+                    </li>
+                    <!-- End submenu (sub-master) -->
+                </ul> <!-- /.tt-menu-nav -->
+            </div> <!-- /.tt-menu-collapse -->
+        </nav>
+        <!-- End main menu -->
+    </div>
+    <!-- End header inner -->
+</header>
+<!-- End header -->
+<!-- *************************************
+        *********** Begin body content ***********
+        ************************************** -->
+
+<div id="body-content">

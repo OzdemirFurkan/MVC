@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> <!-- Global font -->
+    <!--Bootstrap-->
+    <link href="~/Content/css/vendor/bootstrap.min.css" rel="stylesheet" />
+    <!-- Kutuphane ve eklentiler-->
+    <link href="~/Content/css/vendor/animsition.min.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/lightgallery.min.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/jquery.mb.YTPlayer.min.css" rel="stylesheet" />
+    <link href="~/Content/css/vendor/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/css/Site.css" rel="stylesheet" />
+    <!--Master css-->
+    <link href="~/Content/css/helper.css" rel="stylesheet" />
+    <link href="~/Content/css/theme.css" rel="stylesheet" />
+    <link href="~/Content/css/dark-style.css" rel="stylesheet" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+   
+
+    @*
+     <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
+    <script>
+    var recaptcha1;
+    var recaptcha2;
+    var myCallBack = function() {
+     recaptcha1 = grecaptcha.render('recaptcha1', {
+         'sitekey': '6LcSmTMUAAAAAIjsXyNT5y0iSJtY-UwRyW8Q2IgM',
+       'theme' : 'light'
+     });
+
+     recaptcha2 = grecaptcha.render('recaptcha2', {
+         'sitekey': '6LcSmTMUAAAAAIjsXyNT5y0iSJtY-UwRyW8Q2IgM',
+         'theme': 'dark'
+     });
+    };
+    </script>
+*@
+</head>
+<body id="body" class="animsition tt-boxed">
+    
+
+@Html.Partial("_header")
+
+    @RenderBody()
+
+    @Html.Partial("_footer")
+    
+
+<!--Ana JS-->
+    <script src="~/Content/scripts/jquery.min.js"></script>
+    <script src="~/Content/scripts/bootstrap.min.js"></script>
+
+    <!--Kutuphane ve eklenti js-->
+    <script src="~/Content/scripts/vendor/animsition.min.js"></script>
+    <script src="~/Content/scripts/jquery.easing.min.js"></script>
+    <script src="~/Content/scripts/isotope.pkgd.min.js"></script>
+    <script src="~/Content/scripts/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/scripts/owl.carousel.min.js"></script>
+    <script src="~/Content/scripts/jquery.mousewheel.min.js"></script>
+    <script src="~/Content/scripts/jquery.mb.YTPlayer.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Content/scripts/vendor/lightgallery-plugins.js"></script>
+    <script src="~/Content/scripts/vendor/lightgallery.min.js"></script>
+
+    <!--Theme master JS-->
+    <script src="~/Content/scripts/theme.js"></script>
+    <script src="~/Content/scripts/site.js"></script>
+    
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+   
+   
+</body>
+</html>

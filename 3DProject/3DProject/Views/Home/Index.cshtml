@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Tuple<List<_3DProject.Models.data.ProductTable>, List<_3DProject.Models.data.BlogTable>>
+
+<!-- =================================
+    ///// Begin gallery list section /////
+    ================================== -->
+<section id="gallery-list-section">
+    <div class="isotope-wrap">
+        <!-- add/remove class "tt-wrap" to enable/disable element boxed layout (class "tt-boxed" is required in <body> tag! ) -->
+        <!-- Begin isotope
+        ===================
+        * Use class "gutter-1", "gutter-2" or "gutter-3" to add more space between items.
+        * Use class "col-1", "col-2", "col-3", "col-4", "col-5" or "col-6" for columns.
+        -->
+        <div class="isotope col-4">
+
+            <!-- Begin isotope top content -->
+            <!-- End isotope top content -->
+            <!-- Begin isotope items wrap
+            ==============================
+            * Use class "gli-alter-1", "gli-alter-2", "gli-alter-3", "gli-alter-4" or "gli-alter-5" to change gallery list item style.
+            * Use class "gli-dark" or "gli-colored" to enable colored hover overlay (effect only with default hover overlay and "gli-alter-4", "gli-alter-5" classes!).
+            * Use class "gli-frame" to enable image frames.
+            -->
+            <div class="isotope-items-wrap gli-colored gli-alter-4">
+                <!-- Grid sizer (do not remove!!!) -->
+                <div class="grid-sizer"></div>
+
+                <!-- =====================
+                /// Begin isotope item ///
+                ==========================
+                * If you use background image on isotope-item child element, then you need to use class "iso-height-1" or "iso-height-2" to set the item height. If you use simple image tag, then don't use height classes.
+                -->
+
+                @foreach (var item in Model.Item1)
+                {
+                    <div class="isotope-item outdoor iso-height-1">
+                        <!-- Begin gallery list item -->
+                        <div class="gallery-list-item">
+                            <!-- Begin gallery list item image -->
+                            <div class="gl-item-image-wrap">
+                                <!-- Begin gallery list item image inner -->
+                                <a href="/Products/@Html.DisplayFor(model => item.productName)" class="gl-item-image-inner">
+                                    <div class="gl-item-image bg-image" style="background-image: url(@Html.DisplayFor(model => item.productImage)); background-position: 50% 50%"></div>
+
+                                    <span class="gl-item-image-zoom"></span>
+                                </a>
+                                <!-- End gallery list item image inner -->
+                                <!-- Begin gallery list item meta -->
+                                <ul class="gli-meta">
+                                    <li>
+                                        <!-- Begin favorite button -->
+                                        <div class="favorite-btn">
+                                            <div class="fav-inner">
+                                                <div class="icon-heart">
+                                                    <span class="icon-heart-empty"></span>
+                                                    <span class="icon-heart-filled"></span>
+                                                </div>
+                                            </div>
+                                            <div class="fav-count">0</div>
+                                        </div>
+                                        <!-- End favorite button -->
+                                    </li>
+                                </ul>
+                                <!-- End gallery list item meta -->
+                            </div>
+                            <!-- End gallery list item image -->
+                            <!-- Begin gallery list item info -->
+                            <div class="gl-item-info">
+                                <div class="gl-item-caption">
+                                    <h2 class="gl-item-title"><a href="/User/@Html.DisplayFor(model => item.UserTable.UserName)">@Html.DisplayFor(model => item.productName)</a></h2>
+                                    <span class="gl-item-category"><a href="/User/@Html.DisplayFor(model => item.UserTable.UserName)">@Html.DisplayFor(model => item.UserTable.UserName)</a></span>
+                                </div>
+                            </div>
+                            <!-- End gallery list item info -->
+                        </div>
+                        <!-- End gallery list item -->
+                    </div>
+                }
+                <!-- End isotope item -->
+                <!-- =====================
+                /// Begin isotope item ///
+                ==========================
+                * If you use background image on isotope-item child element, then you need to use class "iso-height-1" or "iso-height-2" to set the item height. If you use simple image tag, then don't use height classes.
+                -->
+                <!-- End isotope items wrap -->
+                <!-- Begin isotope pagination
+                ============================== -->
+                <!-- <div class="isotope-pagination">
+                    <div class="iso-load-more">
+                        <a class="btn btn-dark-bordered btn-lg" href="">View More <i class="fa fa-refresh"></i></a>
+                    </div>
+                </div> -->
+                <!-- End isotope pagination -->
+            </div>
+            <!-- End isotope -->
+        </div> <!-- /.isotope-wrap -->
+</section>
+<!-- End gallery list section -->
+<!-- ===========================
+///// Begin footer section /////
+================================
+* Use class "footer-dark" to enable dark footer.
+* Use class "no-margin-top" if needed.
+-->
+<section id="gallery-list-section" class="gallery-list-carousel">
+    <div class="gallery-list-carousel-inner tt-wrap" style="padding-left: 0 !important; padding-right: 0!important;
+
+">
+        <!-- add/remove class "tt-wrap" to enable/disable element boxed layout (class "tt-boxed" is required in <body> tag! ) -->
+        <div class="gl-carousel-wrap no-padding">
+            <!-- Optional: add class "no-padding" to disable paddings -->
+            <!-- Begin content carousel (http://www.owlcarousel.owlgraphic.com)
+            ====================================================================
+            * Use class "nav-outside" for outside nav (requires boxed layout).
+            * Use class "nav-outside-top" for outside top nav (requires enough space at the top of the carousel).
+            * Use class "nav-bottom-right" for bottom right nav.
+            * Use class "nav-rounded" for rounded nav.
+            * Use class "nav-light" to enable nav light style.
+            * Use class "dots-outside" for outside dots (requires enough space at the bottom of the carousel).
+            * Use class "dots-left", "dots-right" or "dots-center-right" to align dots.
+            * Use class "dots-rounded" for rounded dots.
+            * Use class "owl-mousewheel" to enable mousewheel support.
+            * Use class "cursor-grab" to enable cursor grab icon (no effect on links!).
+            * Use class "cc-hover-light", "cc-hover-dark" or "cc-hover-zoom" to enable carousel items hover effect.
+            * Use class "cc-height-1", "cc-height-2", "cc-height-3", "cc-height-4", "cc-height-5", "cc-height-6" or "cc-height-full" to set carousel height (do not use with data-autoheight="true"!!!).
+            * Use class "cc-height-m" to set full height for small screens (do not use with data-autoheight="true"!!!).
+            ================================================================
+            * Available carousel data attributes:
+                    data-items="5".......................(items visible on desktop)
+                    data-tablet-landscape="4"............(items visible on mobiles)
+                    data-tablet-portrait="3".............(items visible on mobiles)
+                    data-mobile-landscape="2"............(items visible on tablets)
+                    data-mobile-portrait="1".............(items visible on tablets)
+                    data-loop="true".....................(true/false)
+                    data-margin="10".....................(space between items)
+                    data-center="true"...................(true/false)
+                    data-start-position="0"..............(item start position)
+                    data-animate-in="fadeIn".............
+                    data-animate-out="fadeOut"...........
+                    data-mouse-drag="false"..............(true/false)
+                    data-touch-drag="false"..............(true/false)
+                    data-autoheight="true"...............(true/false)
+                    data-autoplay="true".................(true/false)
+                    data-autoplay-timeout="5000".........(milliseconds)
+                    data-autoplay-hover-pause="true".....(true/false)
+                    data-autoplay-speed="800"............(milliseconds)
+                    data-drag-end-speed="800"............(milliseconds)
+                    data-nav="true"......................(true/false)
+                    data-nav-speed="800".................(milliseconds)
+                    data-dots="false"....................(true/false)
+                    data-dots-speed="800"................(milliseconds)
+            -->
+            <div class="owl-carousel cc-height-full owl-mousewheel nav-bottom-right cc-hover-dark cc-hover-zoom" data-items="4" data-dots="false" data-nav="true" data-nav-speed="800" data-tablet-landscape="3" data-tablet-portrait="3" data-mobile-landscape="2" data-mobile-portrait="1">
+                <!-- Begin carousel item
+                ========================= -->
+                @foreach(var item in Model.Item2)
+                { 
+                <a href="gallery-single-carousel-center.html" class="cc-item">
+                    <!-- cc image -->
+                    <div class="cc-image bg-image" style="background-image: url(@item.blogImage); background-position: 50% 50%;"></div>
+                    <!-- Begin caption
+                    ===================
+                    * Position classes: "top-left", "top-center", "top-right", "center-left", "center", "center-right", "bottom-left", "bottom-center", "bottom-right".
+                    * Size classes: "cc-caption-xs", "cc-caption-sm", "cc-caption-lg", "cc-caption-xlg", "cc-caption-xxlg".
+                    -->
+                    <div class="cc-caption cc-caption-lg bottom-left">
+                        <!-- max width class is optional -->
+                        <div class="cc-category"><span>@item.UserTable.UserName</span></div>
+                        <h2 class="cc-title">@item.blogName</h2>
+                    </div>
+                    <!-- End caption -->
+                </a>
+                <!-- End carousel item -->
+                }
+                <!-- End carousel item -->
+            </div>
+            <!-- End content carousel -->
+        </div> <!-- /.gl-carousel-wrap -->
+    </div> <!-- /.gallery-list-carousel-inner -->
+</section>
+<!-- End gallery list section -->
+<!-- ============================================
+///// Begin footer section (footer minimal) /////
+=================================================
+* Use class "footer-dark" to enable dark footer.
+* Use class "no-margin-top" if needed.
