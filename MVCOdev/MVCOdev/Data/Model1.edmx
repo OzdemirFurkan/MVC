@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="odevDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="odevDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Kategoriler">
           <Key>
             <PropertyRef Name="kategoriID" />
@@ -13,6 +13,16 @@
           <Property Name="kategoriAd" Type="nvarchar" MaxLength="50" />
           <Property Name="kategoriAciklama" Type="nchar" MaxLength="10" />
           <Property Name="urunID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Urunler">
           <Key>
@@ -38,16 +48,38 @@
         </Association>
         <EntityContainer Name="odevDbModelStoreContainer">
           <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Kategoriler_Urunler" Association="Self.FK_Kategoriler_Urunler">
             <End Role="Urunler" EntitySet="Urunler" />
             <End Role="Kategoriler" EntitySet="Kategoriler" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="odevDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="kategoriID" />
+          </Key>
+          <Property Name="kategoriID" Type="Int32" Nullable="false" />
+          <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kategoriAciklama" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="urunID" Type="Int32" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Kategoriler_Urunler" FromRole="Kategoriler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Urunler">
           <Key>
             <PropertyRef Name="urunID" />
@@ -57,29 +89,11 @@
           <Property Name="urunFiyat" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="stok" Type="Int16" />
           <Property Name="nameSlug" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Kategorilers" Relationship="odevDbModel.FK_Kategoriler_Urunler" FromRole="Urunler" ToRole="Kategoriler" />
-        </EntityType>
-        <EntityContainer Name="odevDB" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Urunlers" EntityType="Self.Urunler" />
-          <EntitySet Name="Kategorilers" EntityType="odevDbModel.Kategoriler" />
-          <AssociationSet Name="FK_Kategoriler_Urunler" Association="odevDbModel.FK_Kategoriler_Urunler">
-            <End Role="Urunler" EntitySet="Urunlers" />
-            <End Role="Kategoriler" EntitySet="Kategorilers" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Kategoriler">
-          <Key>
-            <PropertyRef Name="kategoriID" />
-          </Key>
-          <Property Name="kategoriID" Type="Int32" Nullable="false" />
-          <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="kategoriAciklama" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="urunID" Type="Int32" />
-          <NavigationProperty Name="Urunler" Relationship="odevDbModel.FK_Kategoriler_Urunler" FromRole="Kategoriler" ToRole="Urunler" />
+          <NavigationProperty Name="Kategorilers" Relationship="Self.FK_Kategoriler_Urunler" FromRole="Urunler" ToRole="Kategoriler" />
         </EntityType>
         <Association Name="FK_Kategoriler_Urunler">
-          <End Type="odevDbModel.Urunler" Role="Urunler" Multiplicity="0..1" />
-          <End Type="odevDbModel.Kategoriler" Role="Kategoriler" Multiplicity="*" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Urunler">
               <PropertyRef Name="urunID" />
@@ -89,12 +103,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="odevDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kategorilers" EntityType="Self.Kategoriler" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Urunlers" EntityType="Self.Urunler" />
+          <AssociationSet Name="FK_Kategoriler_Urunler" Association="Self.FK_Kategoriler_Urunler">
+            <End Role="Urunler" EntitySet="Urunlers" />
+            <End Role="Kategoriler" EntitySet="Kategorilers" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="odevDbModelStoreContainer" CdmEntityContainer="odevDB">
+        <EntityContainerMapping StorageEntityContainer="odevDbModelStoreContainer" CdmEntityContainer="odevDbEntities">
+          <EntitySetMapping Name="Kategorilers">
+            <EntityTypeMapping TypeName="odevDbModel.Kategoriler">
+              <MappingFragment StoreEntitySet="Kategoriler">
+                <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+                <ScalarProperty Name="kategoriAciklama" ColumnName="kategoriAciklama" />
+                <ScalarProperty Name="urunID" ColumnName="urunID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="odevDbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Urunlers">
             <EntityTypeMapping TypeName="odevDbModel.Urunler">
               <MappingFragment StoreEntitySet="Urunler">
@@ -103,16 +147,6 @@
                 <ScalarProperty Name="urunFiyat" ColumnName="urunFiyat" />
                 <ScalarProperty Name="stok" ColumnName="stok" />
                 <ScalarProperty Name="nameSlug" ColumnName="nameSlug" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Kategorilers">
-            <EntityTypeMapping TypeName="odevDbModel.Kategoriler">
-              <MappingFragment StoreEntitySet="Kategoriler">
-                <ScalarProperty Name="urunID" ColumnName="urunID" />
-                <ScalarProperty Name="kategoriAciklama" ColumnName="kategoriAciklama" />
-                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
-                <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

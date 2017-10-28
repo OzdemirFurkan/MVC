@@ -11,7 +11,7 @@ namespace MVCOdev.Controllers
     {
         public RedirectResult Delete(int id)
         {
-            odevDB db = new odevDB();
+            odevDbEntities db = new odevDbEntities();
             var data = db.Urunlers.Find(id);
 
             db.Urunlers.Remove(data);
@@ -31,7 +31,7 @@ namespace MVCOdev.Controllers
         {
             if (ModelState.IsValid)
             {
-                odevDB db = new odevDB();
+                odevDbEntities db = new odevDbEntities();
                 model.urunAd = SlugService.Slug(model.urunAd);
                 db.Urunlers.Add(model);
 
@@ -44,7 +44,7 @@ namespace MVCOdev.Controllers
 
         public ActionResult Show(string nameSlug)
         {
-            odevDB db = new odevDB();
+            odevDbEntities db = new odevDbEntities();
             var urun = db.Urunlers.FirstOrDefault(x => x.nameSlug == nameSlug);
 
             return View(urun);
@@ -53,7 +53,7 @@ namespace MVCOdev.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            odevDB db = new odevDB();
+            odevDbEntities db = new odevDbEntities();
             var data = db.Urunlers.Find(id);
 
             return View(data);
@@ -66,7 +66,7 @@ namespace MVCOdev.Controllers
         {
             if (ModelState.IsValid)
             {
-                odevDB db = new odevDB();
+                odevDbEntities db = new odevDbEntities();
                 var data = db.Urunlers.FirstOrDefault(x => x.urunID == model.urunID);
 
                 data.urunAd = model.urunAd;
@@ -82,7 +82,7 @@ namespace MVCOdev.Controllers
 
         public ActionResult List()
         {
-            odevDB db = new odevDB();
+            odevDbEntities db = new odevDbEntities();
             var urun = db.Urunlers.ToList();
 
             return View(urun);
@@ -90,7 +90,7 @@ namespace MVCOdev.Controllers
 
         public ActionResult Detail(int id)
         {
-            odevDB db = new odevDB();
+            odevDbEntities db = new odevDbEntities();
             var urun = db.Urunlers.Find(id);
 
             return View(urun);

@@ -4,10 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0b1e7a9ead0e4db087df8c6ba78c32d9" Name="Diagram1">
-        <EntityTypeShape EntityType="odevDbModel.Urunler" Width="1.5" PointX="1.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="odevDbModel.Kategoriler" Width="1.5" PointX="4.5" PointY="1.25" />
-        <AssociationConnector Association="odevDbModel.FK_Kategoriler_Urunler" />
+      <Diagram DiagramId="1857c68531f546099d8e30a05b8fc1ca" Name="Diagram1">
+        <EntityTypeShape EntityType="odevDbModel.Kategoriler" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="odevDbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="odevDbModel.Urunler" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="odevDbModel.FK_Kategoriler_Urunler" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,7 +12,7 @@ namespace MVCOdev.Controllers
 
         public ActionResult index()
         {
-            odevDB db = new odevDB();
+            odevDbEntities db = new odevDbEntities();
             var product = db.Urunlers.ToList();
 
             return View(product);

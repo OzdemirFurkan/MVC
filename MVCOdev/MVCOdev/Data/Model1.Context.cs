@@ -13,10 +13,10 @@ namespace MVCOdev.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class odevDB : DbContext
+    public partial class odevDbEntities : DbContext
     {
-        public odevDB()
-            : base("name=odevDB")
+        public odevDbEntities()
+            : base("name=odevDbEntities")
         {
         }
     
@@ -25,7 +25,8 @@ namespace MVCOdev.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Urunler> Urunlers { get; set; }
         public virtual DbSet<Kategoriler> Kategorilers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Urunler> Urunlers { get; set; }
     }
 }
